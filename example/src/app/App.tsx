@@ -13,10 +13,10 @@ const App = () => {
       <SplitPane
         left={<Icon size={20} color="white" source="account-circle" />}
         right={<Icon size={20} color="white" source="auto-fix" />}
+        startScreen={<Post />}
+        endScreen={<Gmail />}
         enabled
-        endPane={<Gmail />}>
-        <Post />
-      </SplitPane>
+      />
     </SafeAreaView>
   );
 };
