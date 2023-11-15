@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import React, {ReactElement} from 'react';
 import {
   getDragFn,
   getOrientation,
@@ -15,7 +16,6 @@ import {
 } from './utils';
 
 import Placeholder from './Placeholder';
-import React from 'react';
 import Separator from './Separator';
 import {SplitPanel} from './SplitPanel';
 import {useRef} from 'react';
@@ -24,11 +24,8 @@ export interface SplitBarProps {
   /**
    * The top/left screen.
    */
-  children: React.ReactNode;
-  /**
-   * The bottom/right screen.
-   */
-  endPane?: React.ReactNode;
+  startScreen: JSX.Element;
+  endScreen?: JSX.Element;
   /**
    * Programatically enable/disable split view
    */
@@ -50,12 +47,12 @@ export interface SplitBarProps {
  * @param {SplitBarProps} props
  */
 export const SplitPane = ({
-  children,
-  endPane,
+  endScreen,
+  startScreen,
   enabled,
   left,
   right,
-}: SplitBarProps): JSX.Element | React.ReactNode => {
+}: SplitBarProps): JSX.Element | null => {
   const startPanValue = useRef(
     new Animated.Value(largestSideDimension() / 2 - 24),
   ).current;
@@ -90,13 +87,13 @@ export const SplitPane = ({
   ).current;
 
   if (!enabled) {
-    return children;
+    return startScreen || null;
   }
 
   return (
     <View style={[styles.parentContainer, orientationStyles]}>
       <SplitPanel ref={startPaneRef} _height={startPanValue}>
-        {children}
+        {startScreen}
       </SplitPanel>
 
       <Separator
@@ -106,7 +103,7 @@ export const SplitPane = ({
       />
 
       <SplitPanel _height={endPaneValue}>
-        {endPane || <Placeholder />}
+        {endScreen || <Placeholder />}
       </SplitPanel>
     </View>
   );
