@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "split-view": ["libs/split-view/src/index.ts"]
+    }
+  },
+  "include": ["libs"]
+}
