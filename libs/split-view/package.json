@@ -1,0 +1,8 @@
+{
+  "name": "split-view",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">16",
+    "react-native": ">0.70"
+  }
+}
